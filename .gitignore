@@ -1,0 +1,15 @@
+# Build output
+Debug/
+Release/
+*.exe
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.res
+*.tlog
+*.log
+*.lastbuildstate
+*.manifest
+*.cache
+*_manifest.rc
