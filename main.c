@@ -22,6 +22,7 @@
 #define MAX_TIME_LEN      20    //Max time string length        (时间字符串最大长度)
 
 //Enums (枚举定义)
+
 //Seat status (座位状态)
 typedef enum {
     SEAT_AVAILABLE = 0,		//Free   (空闲)
@@ -75,7 +76,6 @@ typedef struct {
 static FlightSystem g_sys;
 
 //Utility Function Declarations (工具函数声明)
-
 static void clearInputBuffer(void);
 static void pauseScreen(void);
 static int  findFlightIndex(const char *flightNo);
@@ -83,19 +83,16 @@ static int  isWindowSeat(char col);
 static void initSeats(Flight *f, int rows);
 
 //Menu Function Declarations (菜单函数声明)
-
 static void showMainMenu(void);
 static void showAdminMenu(void);
 static void showPassengerMenu(void);
 
 //Admin Function Declarations (管理员功能声明)
-
 static void adminAddFlight(void);       //1. Add flight info		(航班信息录入)
 static void adminBrowseFlights(void);   //2. Browse all flights		(航班信息浏览)
 static void adminSearchFlights(void);	//3. Search flights			(航班信息搜索)
 
 //Passenger Function Declarations (乘客功能声明)
-
 static void passengerBookTicket(void);		//4. Book ticket			(订票)
 static void passengerSellTicket(void);		//5. Sell ticket			(售票)
 static void passengerRefundTicket(void);	//6. Refund ticket			(退票)
@@ -103,15 +100,12 @@ static void passengerStatistics(void);		//7. Statistics				(统计)
 static void passengerQuery(void);			//8. Query					(查询)
 
 //Display Function Declarations (显示函数声明)
-
 static void showSeatMap(const Flight *f);
 static void printPassengerList(const Flight *f);
 
 //main() - Program entry point (程序入口)
-
 int main(void){
     int choice;
-
     //Initialize system (初始化系统)
     g_sys.flightCount = 0;
     printf("========================================\n");
@@ -146,7 +140,6 @@ int main(void){
             break;
         }
     }
-
     return 0;
 }
 
@@ -232,7 +225,6 @@ static void clearInputBuffer(void){
 }
 
 //Pause and wait for user to press Enter (暂停, 按回车继续)
-
 static void pauseScreen(void){
     printf("\nPress Enter to continue... (按回车键继续...)");
     clearInputBuffer();
@@ -241,7 +233,6 @@ static void pauseScreen(void){
 //Find a flight's index in the array by its flight number.(根据航班号在数组中查找航班索引)
 //@param flightNo  The flight number to search for. (要查找的航班号)
 //@return Index (0 ~ flightCount-1), or -1 if not found.(返回下标, 未找到返回 -1)
-
 static int findFlightIndex(const char *flightNo){
     int i;
     for (i = 0; i < g_sys.flightCount; i++){
@@ -254,7 +245,6 @@ static int findFlightIndex(const char *flightNo){
 
 //Check whether a seat column is a window seat.(判断是否为靠窗座位)
 //Seat layout: A(window) B(aisle) C(aisle) D(window)(座位排列: A(窗) B(过道) C(过道) D(窗))
-
 static int isWindowSeat(char col){
     return (col == 'A' || col == 'D');
 }
@@ -262,7 +252,6 @@ static int isWindowSeat(char col){
 //Initialize the seat matrix for a flight.(初始化航班座位矩阵)
 //@param f    Pointer to the flight. (航班指针)
 //@param rows Number of seat rows.   (座位排数)
-
 static void initSeats(Flight *f, int rows){
     int r, c;
 
@@ -273,15 +262,14 @@ static void initSeats(Flight *f, int rows){
 
     for (r = 0; r < rows; r++){
         for (c = 0; c < SEATS_PER_ROW; c++){
-            f->seats[r][c].row    = r + 1;            /* Row starts from 1 (排号从1开始)*/
-            f->seats[r][c].col    = (char)('A' + c);  /* A, B, C, D                     */
+            f->seats[r][c].row    = r + 1;				//Row starts from 1 (排号从1开始)
+            f->seats[r][c].col    = (char)('A' + c);	//A, B, C, D
             f->seats[r][c].status = SEAT_AVAILABLE;
         }
     }
 }
 
 //1. Add Flight Info (Admin) — (航班信息录入)
-
 static void adminAddFlight(void){
     Flight *f;
     int rows;
@@ -343,7 +331,6 @@ static void adminAddFlight(void){
 }
 
 //2. Browse All Flights (Admin) — (航班信息浏览)
-
 static void adminBrowseFlights(void){
     int i;
 
@@ -375,9 +362,7 @@ static void adminBrowseFlights(void){
 }
 
 //Search Flights (Admin & Passenger shared) — (航班信息搜索)
-//Search by flight number / origin / destination
-//(可按航班号、起始地、目的地搜索)
-
+//Search by flight number / origin / destination(可按航班号、起始地、目的地搜索)
 static void adminSearchFlights(void){
     int choice;
     char keyword[MAX_CITY_LEN];
@@ -453,7 +438,6 @@ static void adminSearchFlights(void){
 
 //Display Seat Map (显示座位图)
 //[ ] = Available (空闲), [X] = Booked (已订),A / D are window seats (靠窗)
-
 static void showSeatMap(const Flight *f){
     int r, c;
 
@@ -485,7 +469,6 @@ static void showSeatMap(const Flight *f){
 }
 
 //Print Passenger List for a Flight (打印乘客清单)
-
 static void printPassengerList(const Flight *f){
     int i;
 
@@ -525,7 +508,6 @@ static void printPassengerList(const Flight *f){
 
 //4. Book Ticket (Passenger) — (乘客订票)
 //Select flight -> View seat map -> Choose seat ->Enter passenger info -> Confirm booking(选择航班 -> 查看座位图 -> 选择座位 -> 填写信息 -> 确认)
-
 static void passengerBookTicket(void){
     char flightNo[MAX_FLIGHT_NO_LEN];
     int idx;
@@ -660,7 +642,6 @@ static void passengerBookTicket(void){
 
 //5. Sell Ticket (At Counter) — (现场售票)
 //Similar to booking, with payment info added(与订票流程类似, 增加票价信息)
-
 static void passengerSellTicket(void){
     char flightNo[MAX_FLIGHT_NO_LEN];
     int idx;
@@ -786,7 +767,6 @@ static void passengerSellTicket(void){
 
 //6. Refund Ticket (Passenger) — (乘客退票)
 //Find passenger by name or ID number and cancel the ticket(根据姓名或身份证号查找乘客并退票)
-
 static void passengerRefundTicket(void){
     char flightNo[MAX_FLIGHT_NO_LEN];
     char keyword[MAX_NAME_LEN];   //Name or ID card number (姓名或身份证号)
@@ -890,7 +870,6 @@ static void passengerRefundTicket(void){
 
 //7. Statistics — (统计信息)
 //Show occupancy rate for all flights (各航班上座率统计)
-
 static void passengerStatistics(void){
     int totalBooked     = 0;
     int totalSeats      = 0;
@@ -944,7 +923,6 @@ static void passengerStatistics(void){
 
 //Query (Passenger) — (乘客查询)
 //View flight details, seat map, passenger list, or search(查看航班详情、座位图、乘客清单、搜索)
-
 static void passengerQuery(void){
     int choice;
     char flightNo[MAX_FLIGHT_NO_LEN];
@@ -1003,15 +981,23 @@ static void passengerQuery(void){
         showSeatMap(f);
         break;
 
-    case 2:
-        //View passenger list (查看乘客清单)
-        printPassengerList(f);
+    case 2:{
+        //View passenger list - requires admin password (查看乘客清单 - 需要管理员密码)
+        char pwd[20];
+        printf("\nThis action requires admin authorization.\n");
+        printf("(此操作需要管理员授权, 保护乘客信息安全)\n");
+        printf("Enter admin password (请输入管理员密码): ");
+        scanf("%s", pwd);
+        clearInputBuffer();
+        if (strcmp(pwd, "admin123") == 0)
+            printPassengerList(f);
+        else
+            printf("[Error] Wrong password! Access denied. (错误) 密码错误! 访问被拒绝.\n");
+        }
         break;
-
     default:
         printf("[Error] Invalid option. (无效选项)\n");
         break;
     }
-
     pauseScreen();
 }
