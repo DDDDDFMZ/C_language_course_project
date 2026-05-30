@@ -36,26 +36,6 @@ Legend / 图例: `[ ]` = Free / 空闲  `[X]` = Booked / 已订  A/D = Window se
 - A and D are window seats / A 和 D 为靠窗座位
 - B and C are aisle seats / B 和 C 为过道座位
 
-## Build & Run / 编译运行
-
-### VC++2010 (Visual Studio 2010)
-
-Open the `.vcxproj` file directly, build with `Ctrl+Shift+B`, run with `F5`.
-直接打开 `.vcxproj` 文件，按 `Ctrl+Shift+B` 编译，按 `F5` 运行。
-
-### GCC (MinGW / Linux)
-
-```bash
-gcc -o main.exe main.c
-./main.exe
-```
-
-### Requirements / 环境要求
-
-- Pure C (C89/ANSI C), no C++ features / 纯 C 语言 (C89/ANSI C)，无 C++ 特性
-- GBK encoding for Chinese characters / 中文字符采用 GBK 编码
-- `//` comments supported by VC++2010 C mode / 使用 `//` 注释（VC++2010 C 模式支持）
-
 ## Usage / 使用说明
 
 ### Admin Portal / 管理员入口
@@ -80,28 +60,3 @@ gcc -o main.exe main.c
 
 Requires admin password: `admin123`
 需要管理员密码：`admin123`
-
-## File Structure / 文件结构
-
-```
-飞机航班订票系统/
-  main.c              Main source code / 主源代码
-  README.md           This file / 本文件
-  .gitignore          Git ignore rules / Git 忽略规则
-  *.vcxproj           VC++2010 project files / VC++2010 项目文件
-```
-
-## Data Structures / 数据结构
-
-```
-FlightSystem / 航班系统
-  +-- Flight[0..99] / 航班
-        +-- flightNo, origin, destination, departureTime / 航班号、出发地、目的地、起飞时间
-        +-- totalRows, totalSeats, bookedCount / 总排数、总座位数、已订数
-        +-- Seat[50][4]          (row x column matrix / 排×列矩阵)
-        +-- Passenger[0..499]    (name, ID, seat / 姓名、身份证号、座位)
-```
-
-## License / 许可证
-
-Educational project. / 教学项目。
