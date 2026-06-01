@@ -13,3 +13,9 @@ Release/
 *.manifest
 *.cache
 *_manifest.rc
+
+# Runtime data
+flights.dat
+
+# Office temp files
+~$*
